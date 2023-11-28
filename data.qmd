@@ -12,6 +12,7 @@ data2 <- data2 |>
   group_by(SEQN) |>
   dplyr::summarise(CaffConsump = sum(DR1ICAFF))
 merged_data <- merge(data2, depress, by = "SEQN", all = TRUE)
+merged_data <- na.omit(merged_data)
 ```
 
 ## Description

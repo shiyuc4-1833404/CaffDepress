@@ -5,8 +5,8 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```{r}
 library(dplyr)
 library(haven)
-data <- read_xpt("/Users/shiyun/Desktop/EDAV/Final Project/DR1IFF_J.XPT")
-depress <- read_xpt("/Users/shiyun/Desktop/EDAV/Final Project/DPQ_J.XPT")
+data <- read_xpt("DR1IFF_J.XPT")
+depress <- read_xpt("DPQ_J.XPT")
 data2 <- dplyr::select(data, SEQN, DR1ICAFF)
 data2 <- data2 |>
   group_by(SEQN) |>

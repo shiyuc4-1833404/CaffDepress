@@ -17,7 +17,7 @@ Since the data are in the XPT (SAS file) format, we can use the haven package an
 The plan is divided into three parts: merging datasets, processing data, and using exploratory techniques to answer research questions.  
 
 ### Merge Datasets
-As the issue we mentioned in the above section, the first step we need to do is to merge two datasets. 
+As the issue we mentioned in the above section, this problem is due to the investigation including the time of eating occasion for each person of the whole day ranging from 00:00 to 23:59. Since we only need to analyze caffeine, we can solve it by only keeping SEQN and caffeine intake columns for the Dietary dataset. Then, we can group the SEQN and sum up the caffeine intake of each participant from all time slots for the whole day. Now, we can merge two datasets together by SEQN.  
 
 ### Process Data
 

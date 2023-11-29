@@ -7,17 +7,24 @@
     "text": "1 Introduction"
   },
   {
-    "objectID": "data.html#description",
-    "href": "data.html#description",
+    "objectID": "data.html#technical-description",
+    "href": "data.html#technical-description",
     "title": "2  Data",
-    "section": "2.1 Description",
-    "text": "2.1 Description"
+    "section": "2.1 Technical description",
+    "text": "2.1 Technical description\nBelow are the two datasets that we propose to draw on for the project:\n1. Mental Health - Depression Screener\n2. Dietary Interview - Individual Foods, First Day\nBoth of those datasets are downloaded from CDC National Health and Nutrition Examination Survey. The survey examines a nationally representative sample of about 6,000 people each year. The NHANES interview includes demographic, socioeconomic, dietary, and health-related questions.\nThis project was to examine the dataset from 2017 to 2018. There were 7,640 participants who provided reliable responses to inquiries about caffeine consumption, and 5,533 participants who answered questions regarding depression. Participants’ depression levels were assessed using the 9-item Patient Health Questionnaire depression scale. For each symptom question, points are scored from 0 to 3, with 0 (not at all), 1 (several days), 2 (more than half the days), and 3 (nearly every day). The caffeine intake was collected in-person in the Mobile Examination Center of NHANES. Participants were asked to provide detailed dietary intake information during the 24-hr period prior to the interview. NHANES then calculated the energy and 64 nutrients (including caffeine) of each food using the USDA’s Food and Nutrient Database for Dietary Studies, and estimated participants’ caffeine intake.\nSince the data are in the XPT (SAS file) format, we can use the haven package and the command read_xpt to import the data. In NHANES data, each sample person has a unique identifier called sequence number (SEQN). The next step is to merge two datasets by a unique identifier. However, the data file Dietary Interview - Individual Foods contains multiple records for each sample person and makes them not a unique identifier. Also, the number of participants who took the survey for caffeine consumption is more than depression. When we merge data, this will cause the problem of missing data. The way to solve these issues will be described in the Research plan section."
+  },
+  {
+    "objectID": "data.html#research-plan",
+    "href": "data.html#research-plan",
+    "title": "2  Data",
+    "section": "2.2 Research plan",
+    "text": "2.2 Research plan\nThe plan is divided into three parts: merging datasets, processing data, and using exploratory techniques to answer research questions.\n\n2.2.1 Merge Datasets\nAs the issue we mentioned in the above section, the first step we need to do is to merge two datasets.\n\n\n2.2.2 Process Data"
   },
   {
     "objectID": "data.html#missing-value-analysis",
     "href": "data.html#missing-value-analysis",
     "title": "2  Data",
-    "section": "2.2 Missing value analysis",
-    "text": "2.2 Missing value analysis"
+    "section": "2.3 Missing value analysis",
+    "text": "2.3 Missing value analysis"
   }
 ]

@@ -146,6 +146,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#merge-datasets" id="toc-merge-datasets" class="nav-link" data-scroll-target="#merge-datasets"><span class="header-section-number">2.2.1</span> Merge Datasets</a></li>
   <li><a href="#process-data" id="toc-process-data" class="nav-link" data-scroll-target="#process-data"><span class="header-section-number">2.2.2</span> Process Data</a></li>
+  <li><a href="#use-exploratory-techniques" id="toc-use-exploratory-techniques" class="nav-link" data-scroll-target="#use-exploratory-techniques"><span class="header-section-number">2.2.3</span> Use Exploratory Techniques</a></li>
   </ul></li>
   <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</a></li>
   </ul>
@@ -185,10 +186,14 @@ ul.task-list li input[type="checkbox"] {
 <p>The plan is divided into three parts: merging datasets, processing data, and using exploratory techniques to answer research questions.</p>
 <section id="merge-datasets" class="level3" data-number="2.2.1">
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="merge-datasets"><span class="header-section-number">2.2.1</span> Merge Datasets</h3>
-<p>As the issue we mentioned in the above section, the first step we need to do is to merge two datasets.</p>
+<p>As the issue we mentioned in the above section, this problem is due to the investigation including the time of eating occasion for each person of the whole day ranging from 00:00 to 23:59. Since we only need to analyze caffeine, we can solve it by only keeping SEQN and caffeine intake columns for the Dietary dataset. Then, we can group the SEQN and sum up the caffeine intake of each participant from all time slots for the whole day. Now, we can merge two datasets together by SEQN.</p>
 </section>
 <section id="process-data" class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="process-data"><span class="header-section-number">2.2.2</span> Process Data</h3>
+<p>For the Depression part of the merged dataset, patients will be asked nine questions and they will score them from 0 to 3. In addition to those 4 scores, participants who wrote down 7 means that they refused to answer and 9 means that they don’t know. For these cases, we just treat them as 0. Since participants are actually being asked 10 questions, the last question in the survey does not relate to depression symptoms over the past 2 weeks, and so we decided to delete that column. In order to analyze the depression level more easily, the scores are summed to a total score between 0 and 27. By doing this, we can now see the relationship between caffeine intake and depression level more clearly. Also, since the number of participants who took the survey for caffeine consumption is more than depression, there will be missing values in the merged dataset. We shall delete these data by using the command <code>na.omit()</code>. After processing the data, there are 3169 participants left who took both dietary interviews and depression surveys.</p>
+</section>
+<section id="use-exploratory-techniques" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="use-exploratory-techniques"><span class="header-section-number">2.2.3</span> Use Exploratory Techniques</h3>
 </section>
 </section>
 <section id="missing-value-analysis" class="level2" data-number="2.3">

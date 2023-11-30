@@ -25,7 +25,7 @@ For the Depression part of the merged dataset, patients will be asked nine quest
 Since the number of participants who took the survey for caffeine consumption is more than depression, there will be missing values in the merged dataset. Also, both the original dietary and depression dataset, which will be explained in the `missing value` section, include missing data. We shall delete these data by using the command `na.omit()`. After processing the data, there are 4790 participants left who took both dietary interviews and depression surveys.    
 
 ### Use Exploratory Techniques
-The dataset is being cleaned up now. 
+The dataset is being cleaned up now. According to the criterion provided by the mental health professional interview, PHQ-9 scores of 5, 10, 15, and 20 represented mild, moderate, moderately severe, and severe depression, respectively. So, we can create a new column called `depressionLevel` according to the total score of each participant and then create a scatter plot of caffeine consumption (y-axis) vs. depression score (x-axis) faceted by depression level so that we can learn the relationship between caffeine consumption and depression level by observing the scale of y. Also, we can use the command `cut()` with `quantile()` to divide the caffeine consumption into four groups of roughly equal size and create a depression level bar chart faceted by the new caffeine consumption group to view the trend.  
 
 ## Missing value analysis
 Missing Pattern for Caffeine Dataset:  

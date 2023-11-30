@@ -190,7 +190,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="process-data" class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="process-data"><span class="header-section-number">2.2.2</span> Process Data</h3>
-<p>For the Depression part of the merged dataset, patients will be asked nine questions and they will score them from 0 to 3. In addition to those 4 scores, participants who wrote down 7 means that they refused to answer and 9 means that they don’t know. For these cases, we just treat them as 0. Since participants are actually being asked 10 questions, the last question in the survey does not relate to depression symptoms over the past 2 weeks, and so we decided to delete that column. In order to analyze the depression level more easily, the scores are summed to a total score between 0 and 27. By doing this, we can now see the relationship between caffeine intake and depression level more clearly. Also, since the number of participants who took the survey for caffeine consumption is more than depression, there will be missing values in the merged dataset. We shall delete these data by using the command <code>na.omit()</code>. After processing the data, there are 3169 participants left who took both dietary interviews and depression surveys.</p>
+<p>For the Depression part of the merged dataset, patients will be asked nine questions and they will score them from 0 to 3. In addition to those 4 scores, participants who wrote down 7 means that they refused to answer and 9 means that they don’t know. For these cases, we just treat them as 0 in this project. In addition, participants are actually being asked 10 questions, the last question in the survey does not relate to depression symptoms over the past 2 weeks, and so we decided to delete that column. In order to analyze the depression level more easily, the scores are summed to a total score between 0 and 27. By doing this, we can now see the relationship between caffeine intake and depression level more clearly.</p>
+<p>Since the number of participants who took the survey for caffeine consumption is more than depression, there will be missing values in the merged dataset. Also, both the original dietary and depression dataset, which will be explained in the <code>missing value</code> section, include missing data. We shall delete these data by using the command <code>na.omit()</code>. After processing the data, there are 4790 participants left who took both dietary interviews and depression surveys. The dataset are being cleaned up now.</p>
 </section>
 <section id="use-exploratory-techniques" class="level3" data-number="2.2.3">
 <h3 data-number="2.2.3" class="anchored" data-anchor-id="use-exploratory-techniques"><span class="header-section-number">2.2.3</span> Use Exploratory Techniques</h3>
@@ -198,6 +199,20 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="missing-value-analysis" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</h2>
+<p>Missing Pattern for Caffeine Dataset:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="data_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Since the dietary dataset includes a total of 84 variables and we only need the factor caffeine intake, I just keep SEQN and caffeine columns to analyze the missing pattern. From the graph, we can see that no SEQN is missing. There are approximately 150 missing values for caffeine consumption.</p>
+<p>Missing Pattern for Depression Dataset:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>From the graph, we can see that there is no missing value for SEQN. Question with code 100 has most missing values, which is approximately 2000. Question with code from 10 to 90 has approximately the similar number of missing values, which is around 400 to 500. For the missing pattern, we can see that the missing value always appeared in consecutive questions. There are about 3000 participants answer all ten questions; around 1700 participants who only does not answer Question with code 100; less than 500 participants does not answer any of the ten questions. Participants responded the survey starting from the question with code 010 to 100. For each of the rest four patterns: only 1 participant does not answer last two questions; 1 participant does not answer last 5 questions; 1 participant only answer first three questions; and 1 participant only answer first question. Since the amount of people is too small, we cannot see clearly from the row count graph.</p>
 
 
 </section>

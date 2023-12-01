@@ -32,7 +32,10 @@ merged_data <- merged_data |>
     TRUE ~ as.character(depressLevel)))
 ggplot(merged_data, aes(depressScore, CaffConsump)) +
         geom_point(size=0.8) +
-        facet_wrap(~depressLevel, scales="free_y") +
+  facet_wrap(~factor(depressLevel, levels=c('remission', 'mild', 'moderate',
+                                              'moderately severe', 'severe')),
+             scales="free_y")+
+  # facet_wrap(~depressLevel, scales="free_y") +
   xlab("Depression Score") +
   ylab("Caffeine Intake") +
   ggtitle("Scatterplot of Caffeine Intake vs. Depression Score")

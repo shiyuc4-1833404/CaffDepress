@@ -32,6 +32,7 @@ merged_data <- merged_data |>
     depressLevel > 20 ~ "severe",
     TRUE ~ as.character(depressLevel)))
 ```
+
 ```{r,echo=FALSE}
 # Deal with Demo dataset
 info <- read_xpt("DEMO_J.XPT")
@@ -73,8 +74,8 @@ merged_info <- merged_info |>
     TRUE ~ as.character(maritalStatus)))
 
 code <- c(1:15,77,99)
-var <- c("$0-$4,999","$5,000-$9,999","$10,000-$14,999",
-         "$15,000-$19,999","$20,000-$24,999","$25,000-$34,999",
+var <- c("$<$20,000","$<$20,000","$<$20,000",
+         "<$20,000","$20,000-$24,999","$25,000-$34,999",
          "$35,000-$44,999","$45,000-$54,999","$55,000-$64,999",
          "$65,000-$74,999",">$20,000","<$20,000","$75,000-$99,999",
          ">$100,000","Refused","Don't know")
@@ -86,6 +87,7 @@ for (i in 1:17) {
 }
 ```
 
+## Plot1
 ```{r}
 # Plot1
 ggplot(merged_info, aes(depressScore, CaffConsump)) +
@@ -97,5 +99,9 @@ ggplot(merged_info, aes(depressScore, CaffConsump)) +
   xlab("Depression Score") +
   ylab("Caffeine Intake") +
   ggtitle("Scatterplot of Caffeine Intake vs. Depression Score")
+```
+## Plot2
+```{r}
+
 ```
 

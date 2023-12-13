@@ -40,3 +40,16 @@ ggplot(merged_data, aes(depressScore, CaffConsump)) +
   ylab("Caffeine Intake") +
   ggtitle("Scatterplot of Caffeine Intake vs. Depression Score")
 ```
+```{r}
+info <- read_xpt("DEMO_J.XPT")
+oldname <- c("DMDHRGND", "DMDHRAGZ", "RIDRETH3", "INDFMIN2", "DMDHRMAZ")
+newname <- c("Gender", "Age", "Race", "Income", "Marital")
+info <- dplyr::select(info, SEQN, DMDHRGND, DMDHRAGZ, RIDRETH3,
+                      INDFMIN2, DMDHRMAZ)
+merged_info <- merge(merged_data, info, by = "SEQN", all = TRUE)
+merged_info <- na.omit(merged_info)
+for (i in 1:5) {
+  names(merged_info)[names(merged_info) == oldname[i]] <- newname[i]
+}
+```
+

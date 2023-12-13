@@ -74,7 +74,7 @@ merged_info <- merged_info |>
     TRUE ~ as.character(maritalStatus)))
 
 code <- c(1:15,77,99)
-var <- c("$<$20,000","$<$20,000","$<$20,000",
+var <- c("<$20,000","<$20,000","<$20,000",
          "<$20,000","$20,000-$24,999","$25,000-$34,999",
          "$35,000-$44,999","$45,000-$54,999","$55,000-$64,999",
          "$65,000-$74,999",">$20,000","<$20,000","$75,000-$99,999",
@@ -100,7 +100,18 @@ ggplot(merged_info, aes(depressScore, CaffConsump)) +
   ylab("Caffeine Intake") +
   ggtitle("Scatterplot of Caffeine Intake vs. Depression Score")
 ```
+
 ## Plot2
+```{r}
+## Plot2
+library(forcats)
+ggplot(merged_info, aes(x=fct_infreq(Race), fill = Gender)) + 
+  geom_bar() +
+  ylab("Count") +
+  ggtitle("Frequency of Race by Gender")
+```
+
+## Plot3
 ```{r}
 
 ```

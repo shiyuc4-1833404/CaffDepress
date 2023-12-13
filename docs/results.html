@@ -171,7 +171,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#plot1" id="toc-plot1" class="nav-link active" data-scroll-target="#plot1"><span class="header-section-number">3.1</span> Plot1</a></li>
+  <li><a href="#plot2" id="toc-plot2" class="nav-link" data-scroll-target="#plot2"><span class="header-section-number">3.2</span> Plot2</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/shiyuc4-1833404/CaffDepress/edit/main/results.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/shiyuc4-1833404/CaffDepress/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -193,6 +200,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="plot1" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="plot1"><span class="header-section-number">3.1</span> Plot1</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -211,8 +220,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="results_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="plot2" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="plot2"><span class="header-section-number">3.2</span> Plot2</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged_info, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">fct_infreq</span>(Race), <span class="at">fill =</span> Gender)) <span class="sc">+</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Frequency of Race by Gender"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -468,7 +494,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/shiyuc4-1833404/CaffDepress/edit/main/results.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/shiyuc4-1833404/CaffDepress/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

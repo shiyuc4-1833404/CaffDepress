@@ -28,10 +28,17 @@
     "text": "2.3 Missing value analysis\nMissing Pattern for Caffeine Dataset:\n\n\n\n\n\nSince the dietary dataset includes a total of 84 variables and we only need the factor caffeine intake, I just keep SEQN and caffeine columns to analyze the missing pattern. From the graph, we can see that no SEQN is missing. There are approximately 150 missing values for caffeine consumption.\nMissing Pattern for Depression Dataset:\n\n\n\n\n\nFrom the graph, we can see that there is no missing value for SEQN. Question with code 100 has most missing values, which is approximately 2000. Question with code from 10 to 90 has approximately the similar number of missing values, which is around 400 to 500. For the missing pattern, we can see that the missing value always appeared in consecutive questions. There are about 3000 participants answer all ten questions; around 1700 participants who only does not answer Question with code 100; less than 500 participants does not answer any of the ten questions. Participants responded the survey starting from the question with code 010 to 100. For each of the rest four patterns: only 1 participant does not answer last two questions; 1 participant does not answer last 5 questions; 1 participant only answer first three questions; and 1 participant only answer first question. Since the amount of people is too small, we cannot see clearly from the row count graph."
   },
   {
-    "objectID": "results.html",
-    "href": "results.html",
+    "objectID": "results.html#plot1",
+    "href": "results.html#plot1",
     "title": "3  Results",
-    "section": "",
-    "text": "Code\n# Plot1\nggplot(merged_info, aes(depressScore, CaffConsump)) +\n        geom_point(size=0.8) +\n  facet_wrap(~factor(depressLevel, levels=c('remission', 'mild', 'moderate',\n                                            'moderately severe', 'severe')),\n             scales=\"free_y\")+\n  # facet_wrap(~depressLevel, scales=\"free_y\") +\n  xlab(\"Depression Score\") +\n  ylab(\"Caffeine Intake\") +\n  ggtitle(\"Scatterplot of Caffeine Intake vs. Depression Score\")"
+    "section": "3.1 Plot1",
+    "text": "3.1 Plot1\n\n\nCode\n# Plot1\nggplot(merged_info, aes(depressScore, CaffConsump)) +\n        geom_point(size=0.8) +\n  facet_wrap(~factor(depressLevel, levels=c('remission', 'mild', 'moderate',\n                                            'moderately severe', 'severe')),\n             scales=\"free_y\")+\n  # facet_wrap(~depressLevel, scales=\"free_y\") +\n  xlab(\"Depression Score\") +\n  ylab(\"Caffeine Intake\") +\n  ggtitle(\"Scatterplot of Caffeine Intake vs. Depression Score\")"
+  },
+  {
+    "objectID": "results.html#plot2",
+    "href": "results.html#plot2",
+    "title": "3  Results",
+    "section": "3.2 Plot2",
+    "text": "3.2 Plot2\n\n\nCode\nlibrary(forcats)\nggplot(merged_info, aes(x=fct_infreq(Race), fill = Gender)) + \n  geom_bar() +\n  ylab(\"Count\") +\n  ggtitle(\"Frequency of Race by Gender\")"
   }
 ]

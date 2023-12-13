@@ -40,16 +40,56 @@ ggplot(merged_data, aes(depressScore, CaffConsump)) +
   ylab("Caffeine Intake") +
   ggtitle("Scatterplot of Caffeine Intake vs. Depression Score")
 ```
-```{r}
+```{r,echo=FALSE}
 info <- read_xpt("DEMO_J.XPT")
 oldname <- c("DMDHRGND", "DMDHRAGZ", "RIDRETH3", "INDFMIN2", "DMDHRMAZ")
-newname <- c("Gender", "Age", "Race", "Income", "Marital")
+newname <- c("Gender", "Age", "Race", "Income", "maritalStatus")
 info <- dplyr::select(info, SEQN, DMDHRGND, DMDHRAGZ, RIDRETH3,
                       INDFMIN2, DMDHRMAZ)
 merged_info <- merge(merged_data, info, by = "SEQN", all = TRUE)
 merged_info <- na.omit(merged_info)
 for (i in 1:5) {
   names(merged_info)[names(merged_info) == oldname[i]] <- newname[i]
+}
+merged_info <- merged_info |>
+  mutate(Gender = case_when(
+    Gender == 1 ~ "Male",
+    Gender == 2 ~ "Female",
+    TRUE ~ as.character(Gender)))
+merged_info <- merged_info |>
+  mutate(Age = case_when(
+    Age == 1 ~ "<20 years",
+    Age == 2 ~ "20-39 years",
+    Age == 3 ~ "40-59 years",
+    Age == 4 ~ "60+ years",
+    TRUE ~ as.character(Age)))
+merged_info <- merged_info |>
+  mutate(Race = case_when(
+    Race == 1 | Race == 2 ~ "Hispanic",
+    Race == 3 ~ "White",
+    Race == 4 ~ "Black",
+    Race == 6 ~ "Asian",
+    Race == 7 ~ "Other",
+    TRUE ~ as.character(Race)))
+
+merged_info <- merged_info |>
+  mutate(maritalStatus = case_when(
+    maritalStatus == 1 ~ "Married",
+    maritalStatus == 2 ~ "Widowed",
+    maritalStatus == 3 ~ "Divorced",
+    TRUE ~ as.character(maritalStatus)))
+
+code <- c(1:15,77,99)
+var <- c("$0-$4,999","$5,000-$9,999","$10,000-$14,999",
+         "$15,000-$19,999","$20,000-$24,999","$25,000-$34,999",
+         "$35,000-$44,999","$45,000-$54,999","$55,000-$64,999",
+         "$65,000-$74,999",">$20,000","<$20,000","$75,000-$99,999",
+         ">$100,000","Refused","Don't know")
+for (i in 1:17) {
+  merged_info <- merged_info |>
+    mutate(Income = case_when(
+      Income == code[i] ~ var[i],
+      TRUE ~ as.character(Income)))
 }
 ```
 

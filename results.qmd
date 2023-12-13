@@ -52,13 +52,6 @@ merged_info <- merged_info |>
     Gender == 2 ~ "Female",
     TRUE ~ as.character(Gender)))
 
-# merged_info <- merged_info |>
-#   mutate(Age = case_when(
-#     Age == 1 ~ "<20 years",
-#     Age == 2 ~ "20-39 years",
-#     Age == 3 ~ "40-59 years",
-#     Age == 4 ~ "60+ years",
-#     TRUE ~ as.character(Age)))
 set.seed(123)
 max <- c(20,39,59,70)
 min <- c(15,20,40,60)
@@ -176,18 +169,38 @@ merged_info$ConsumpLevel <- cut(merged_info$CaffConsump,
                                 left=FALSE,
                                 labels = c("Low", "Mild", "Moderate",
                                           "High"))
+merged_info <- transform(merged_info, depressLevel = factor(depressLevel, 
+                                                            levels = c("remission", "mild", 
+                                                                       "moderate", "moderately severe",
+                                                                       "severe")))
 mosaic(~ConsumpLevel + depressLevel,
-       labeling=vcd::labeling_border(rot_labels = c(0, 30),
+       labeling=vcd::labeling_border(rot_labels = c(0, 0),
                                   labeling_args = list(cex = 1)),
        main="Mosaic Plot of Coffeine Consumption and Depression Level",
        data=merged_info, direction=c("v","h"),
        spacing = spacing_dimequal(c(.4, 0)),
        highlighting = "depressLevel",
-       highlighting_fill = c("lightblue", "pink", "#cc9966","salmon","steelblue"))
+       highlighting_fill = c("#EFF3FF", "#BDD7E7", "#6BAED6", "#3182BD", "#08519C"))
 ```
 ## Plot7
 ```{r}
+library("ggpubr")
+high <- ggplot(data=merged_info,aes(x = CaffConsump)) +
+  geom_histogram() +
+  xlim(0, 500) +
+  ylim(0,400) +
+  ggtitle("Histogram of Caffine Consumption Lower Part") +
+  xlab("Caffine Consumption")
+low <- ggplot(data=merged_info,aes(x = CaffConsump)) +
+  geom_histogram() +
+  xlim(500, max(merged_info$CaffConsump)) +
+  ggtitle("Histogram of Caffine Consumption Higher Part") +
+  xlab("Caffine Consumption")
+ggarrange(high, low, ncol = 1, nrow = 2)
+```
+## Plot8
+```{r}
+library(GGally)
+ggparcoord(data = merged_info, columns = c(2,12,15),alphaLines = 0.01) + ggtitle('Nutrients Parallel Coordinates Plot')
 
 ```
-
-

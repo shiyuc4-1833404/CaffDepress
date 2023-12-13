@@ -169,14 +169,25 @@ library(vcd)
 library(vcdExtra)
 library(RColorBrewer)
 library(MASS)
-mosaic(~maritalStatus + depressLevel, 
-       labeling=vcd::labeling_border(rot_labels = c(0, 30), 
+group <- quantile(merged_info$CaffConsump)
+merged_info$ConsumpLevel <- cut(merged_info$CaffConsump,
+                                breaks=c(group[1]-1, group[2], group[3], group[4], group[5]),
+                                right=TRUE,
+                                left=FALSE,
+                                labels = c("Low", "Mild", "Moderate",
+                                          "High"))
+mosaic(~ConsumpLevel + depressLevel,
+       labeling=vcd::labeling_border(rot_labels = c(0, 30),
                                   labeling_args = list(cex = 1)),
-       main="Mosaic Plot of Gender and Depression Level",
+       main="Mosaic Plot of Coffeine Consumption and Depression Level",
        data=merged_info, direction=c("v","h"),
        spacing = spacing_dimequal(c(.4, 0)),
        highlighting = "depressLevel",
        highlighting_fill = c("lightblue", "pink", "#cc9966","salmon","steelblue"))
+```
+## Plot7
+```{r}
+
 ```
 
 

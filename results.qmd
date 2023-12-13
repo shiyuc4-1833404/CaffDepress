@@ -92,7 +92,7 @@ merged_info <- merged_info |>
 ```{r}
 code <- c(1:10,12,13,14,15)
 code2 <-c(77,99)
-max <- c(4999,9999,14999,19999,24999,34999,44999,54999,64999,74999,0,199999,20000,99999,19999)
+max <- c(4999,9999,14999,19999,24999,34999,44999,54999,64999,74999,0,110000,20000,99999,110000)
 min <- c(1000,5000,10000,15000,20000,25000,35000,45000,55000,65000,0,20000,1000,75000,10000)
 var <- c("<$20,000","<$20,000","<$20,000",
          "<$20,000","$20,000-$24,999","$25,000-$34,999",
@@ -111,7 +111,6 @@ merged_info <- mutate(merged_info, Income = sapply(Income, function(x) {
   if (x %in% code2){
     return(NA)
   }
-  return(as.character(x))
 }))
 merged_info$Income <- as.numeric(as.character(merged_info$Income))
 ```
@@ -131,10 +130,11 @@ ggplot(merged_info, aes(depressScore, CaffConsump)) +
 ```
 ## Plot2
 ```{r}
-ggplot(merged_info, aes(x=Income))+
+update <- merged_info |>
+  na.omit(merged_info$Income)
+ggplot(update, aes(x=Income))+
   geom_histogram(aes(y=after_stat(density)),binwidth = 3000, fill = "blue", color = "black", alpha = 0.7) +
   geom_density(lwd=1.25)+
-  labs(title="Age density curve with normal curve plot",x="Age", y = "Count")
   labs(title = "Income Distribution", x = "Income", y = "Frequency") +
   theme_minimal()
 ```
@@ -148,10 +148,10 @@ geom_boxplot(width=0.3)+
 ## Plot4
 ```{r}
 ggplot(merged_info) +
-  geom_hex(aes(x = Age, y = depressScore), bins = 10) +
+  geom_hex(aes(x = CaffConsump, y = depressScore), bins = 10) +
   labs(
     title = "Square Heatmap of Bin Counts",
-    x = "Age",
+    x = "Caffeine Consumption",
     y = "depressScore")
 ```
 ## Plot5
@@ -160,5 +160,23 @@ library(forcats)
 ggplot(merged_info, aes(x=fct_infreq(Race), fill = Gender)) + 
   geom_bar() +
   ylab("Count") +
+  xlab("Race") +
   ggtitle("Frequency of Race by Gender")
 ```
+## Plot6
+```{r}
+library(vcd)
+library(vcdExtra)
+library(RColorBrewer)
+library(MASS)
+mosaic(~maritalStatus + depressLevel, 
+       labeling=vcd::labeling_border(rot_labels = c(0, 30), 
+                                  labeling_args = list(cex = 1)),
+       main="Mosaic Plot of Gender and Depression Level",
+       data=merged_info, direction=c("v","h"),
+       spacing = spacing_dimequal(c(.4, 0)),
+       highlighting = "depressLevel",
+       highlighting_fill = c("lightblue", "pink", "#cc9966","salmon","steelblue"))
+```
+
+

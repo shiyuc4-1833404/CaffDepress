@@ -3,6 +3,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 # Results
 ```{r,echo=FALSE}
+# Deal with Coffeine and Depression dataset
 library(dplyr)
 library(haven)
 library(ggplot2)
@@ -30,17 +31,9 @@ merged_data <- merged_data |>
     depressLevel > 15 & depressLevel <= 20 ~ "moderately severe",
     depressLevel > 20 ~ "severe",
     TRUE ~ as.character(depressLevel)))
-ggplot(merged_data, aes(depressScore, CaffConsump)) +
-        geom_point(size=0.8) +
-  facet_wrap(~factor(depressLevel, levels=c('remission', 'mild', 'moderate',
-                                              'moderately severe', 'severe')),
-             scales="free_y")+
-  # facet_wrap(~depressLevel, scales="free_y") +
-  xlab("Depression Score") +
-  ylab("Caffeine Intake") +
-  ggtitle("Scatterplot of Caffeine Intake vs. Depression Score")
 ```
 ```{r,echo=FALSE}
+# Deal with Demo dataset
 info <- read_xpt("DEMO_J.XPT")
 oldname <- c("DMDHRGND", "DMDHRAGZ", "RIDRETH3", "INDFMIN2", "DMDHRMAZ")
 newname <- c("Gender", "Age", "Race", "Income", "maritalStatus")
@@ -91,5 +84,18 @@ for (i in 1:17) {
       Income == code[i] ~ var[i],
       TRUE ~ as.character(Income)))
 }
+```
+
+```{r}
+# Plot1
+ggplot(merged_info, aes(depressScore, CaffConsump)) +
+        geom_point(size=0.8) +
+  facet_wrap(~factor(depressLevel, levels=c('remission', 'mild', 'moderate',
+                                            'moderately severe', 'severe')),
+             scales="free_y")+
+  # facet_wrap(~depressLevel, scales="free_y") +
+  xlab("Depression Score") +
+  ylab("Caffeine Intake") +
+  ggtitle("Scatterplot of Caffeine Intake vs. Depression Score")
 ```
 

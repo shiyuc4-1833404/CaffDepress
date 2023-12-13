@@ -202,5 +202,4 @@ ggarrange(high, low, ncol = 1, nrow = 2)
 ```{r}
 library(GGally)
 ggparcoord(data = merged_info, columns = c(2,12,15),alphaLines = 0.01) + ggtitle('Nutrients Parallel Coordinates Plot')
-
 ```

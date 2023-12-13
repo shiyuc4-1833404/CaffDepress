@@ -37,4 +37,3 @@ ggplot(merged_data, aes(depressScore, CaffConsump)) +
   ylab("Caffeine Intake") +
   ggtitle("Scatterplot of Caffeine Intake vs. Depression Score")
 ```
-

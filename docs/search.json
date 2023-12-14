@@ -39,6 +39,48 @@
     "href": "results.html#plot2",
     "title": "3  Results",
     "section": "3.2 Plot2",
-    "text": "3.2 Plot2\n\n\nCode\nlibrary(forcats)\nggplot(merged_info, aes(x=fct_infreq(Race), fill = Gender)) + \n  geom_bar() +\n  ylab(\"Count\") +\n  ggtitle(\"Frequency of Race by Gender\")"
+    "text": "3.2 Plot2\n\n\nCode\nupdate &lt;- merged_info |&gt;\n  na.omit(merged_info$Income)\nggplot(update, aes(x=Income))+\n  geom_histogram(aes(y=after_stat(density)),binwidth = 3000, fill = \"blue\", color = \"black\", alpha = 0.7) +\n  geom_density(lwd=1.25)+\n  labs(title = \"Income Distribution\", x = \"Income\", y = \"Frequency\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "results.html#plot3",
+    "href": "results.html#plot3",
+    "title": "3  Results",
+    "section": "3.3 Plot3",
+    "text": "3.3 Plot3\n\n\nCode\nggplot(merged_info, aes(x=Income, y=depressLevel)) + \n  geom_density_ridges(scale=0.75)+\ngeom_boxplot(width=0.3)+\n  labs(title=\"Income horizontal boxplots and ridgeline plots vs. Depression Level\",x=\"Income\", y = \"Depression Level\")"
+  },
+  {
+    "objectID": "results.html#plot4",
+    "href": "results.html#plot4",
+    "title": "3  Results",
+    "section": "3.4 Plot4",
+    "text": "3.4 Plot4\n\n\nCode\nggplot(merged_info) +\n  geom_hex(aes(x = CaffConsump, y = depressScore), bins = 10) +\n  labs(\n    title = \"Square Heatmap of Bin Counts\",\n    x = \"Caffeine Consumption\",\n    y = \"depressScore\")"
+  },
+  {
+    "objectID": "results.html#plot5",
+    "href": "results.html#plot5",
+    "title": "3  Results",
+    "section": "3.5 Plot5",
+    "text": "3.5 Plot5\n\n\nCode\nlibrary(forcats)\nggplot(merged_info, aes(x=fct_infreq(Race), fill = Gender)) + \n  geom_bar() +\n  ylab(\"Count\") +\n  xlab(\"Race\") +\n  ggtitle(\"Frequency of Race by Gender\")"
+  },
+  {
+    "objectID": "results.html#plot6",
+    "href": "results.html#plot6",
+    "title": "3  Results",
+    "section": "3.6 Plot6",
+    "text": "3.6 Plot6\n\n\nCode\nlibrary(vcd)\nlibrary(vcdExtra)\nlibrary(RColorBrewer)\nlibrary(MASS)\ngroup &lt;- quantile(merged_info$CaffConsump)\nmerged_info$ConsumpLevel &lt;- cut(merged_info$CaffConsump,\n                                breaks=c(group[1]-1, group[2], group[3], group[4], group[5]),\n                                right=TRUE,\n                                left=FALSE,\n                                labels = c(\"Low\", \"Mild\", \"Moderate\",\n                                          \"High\"))\nmerged_info &lt;- transform(merged_info, depressLevel = factor(depressLevel, \n                                                            levels = c(\"remission\", \"mild\", \n                                                                       \"moderate\", \"moderately severe\",\n                                                                       \"severe\")))\nmosaic(~ConsumpLevel + depressLevel,\n       labeling=vcd::labeling_border(rot_labels = c(0, 0),\n                                  labeling_args = list(cex = 1)),\n       main=\"Mosaic Plot of Coffeine Consumption and Depression Level\",\n       data=merged_info, direction=c(\"v\",\"h\"),\n       spacing = spacing_dimequal(c(.4, 0)),\n       highlighting = \"depressLevel\",\n       highlighting_fill = c(\"#EFF3FF\", \"#BDD7E7\", \"#6BAED6\", \"#3182BD\", \"#08519C\"))"
+  },
+  {
+    "objectID": "results.html#plot7",
+    "href": "results.html#plot7",
+    "title": "3  Results",
+    "section": "3.7 Plot7",
+    "text": "3.7 Plot7\n\n\nCode\nlibrary(\"ggpubr\")\nhigh &lt;- ggplot(data=merged_info,aes(x = CaffConsump)) +\n  geom_histogram() +\n  xlim(0, 500) +\n  ylim(0,400) +\n  ggtitle(\"Histogram of Caffine Consumption Lower Part\") +\n  xlab(\"Caffine Consumption\")\nlow &lt;- ggplot(data=merged_info,aes(x = CaffConsump)) +\n  geom_histogram() +\n  xlim(500, max(merged_info$CaffConsump)) +\n  ggtitle(\"Histogram of Caffine Consumption Higher Part\") +\n  xlab(\"Caffine Consumption\")\nggarrange(high, low, ncol = 1, nrow = 2)"
+  },
+  {
+    "objectID": "results.html#plot8",
+    "href": "results.html#plot8",
+    "title": "3  Results",
+    "section": "3.8 Plot8",
+    "text": "3.8 Plot8\n\n\nCode\nlibrary(GGally)\nggparcoord(data = merged_info, columns = c(2,12,15),alphaLines = 0.01) + ggtitle('Nutrients Parallel Coordinates Plot')"
   }
 ]

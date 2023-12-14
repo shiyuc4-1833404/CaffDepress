@@ -8,8 +8,8 @@ library(ggridges)
 library(dplyr)
 library(haven)
 library(ggplot2)
-data <- read_xpt("DR1IFF_J.XPT")
-depress <- read_xpt("DPQ_J.XPT")
+data <- read_xpt("/Users/shiyun/Desktop/P_DR1IFF.XPT")
+depress <- read_xpt("P_DPQ.XPT")
 data2 <- dplyr::select(data, SEQN, DR1ICAFF)
 data2 <- data2 |>
   group_by(SEQN) |>
@@ -36,11 +36,11 @@ merged_data <- merged_data |>
 
 ```{r,echo=FALSE}
 # Deal with Demo dataset
-info <- read_xpt("DEMO_J.XPT")
-oldname <- c("DMDHRGND", "DMDHRAGZ", "RIDRETH3", "INDFMIN2", "DMDHRMAZ")
+info <- read_xpt("P_DEMO.XPT")
+oldname <- c("RIAGENDR", "RIDAGEYR", "RIDRETH3", "INDFMPIR", "DMDMARTZ")
 newname <- c("Gender", "Age", "Race", "Income", "maritalStatus")
-info <- dplyr::select(info, SEQN, DMDHRGND, DMDHRAGZ, RIDRETH3,
-                      INDFMIN2, DMDHRMAZ)
+info <- dplyr::select(info, SEQN, RIAGENDR, RIDAGEYR, RIDRETH3,
+                      INDFMPIR, DMDMARTZ)
 merged_info <- merge(merged_data, info, by = "SEQN", all = TRUE)
 merged_info <- na.omit(merged_info)
 for (i in 1:5) {
@@ -51,19 +51,6 @@ merged_info <- merged_info |>
     Gender == 1 ~ "Male",
     Gender == 2 ~ "Female",
     TRUE ~ as.character(Gender)))
-
-set.seed(123)
-max <- c(20,39,59,70)
-min <- c(15,20,40,60)
-code <-c(1:4)
-merged_info <- mutate(merged_info, Age = sapply(Age, function(x) {
-  if (x %in% code) {
-    i <- which(code == x)
-    if (!is.na(min[i]) && !is.na(max[i])) {
-      return(sample(min[i]:max[i], 1))
-    }
-  }
-}))
 
 merged_info <- merged_info |>
   mutate(Race = case_when(
@@ -82,32 +69,6 @@ merged_info <- merged_info |>
     TRUE ~ as.character(maritalStatus)))
 ```
 
-```{r}
-code <- c(1:10,12,13,14,15)
-code2 <-c(77,99)
-max <- c(4999,9999,14999,19999,24999,34999,44999,54999,64999,74999,0,110000,20000,99999,110000)
-min <- c(1000,5000,10000,15000,20000,25000,35000,45000,55000,65000,0,20000,1000,75000,10000)
-var <- c("<$20,000","<$20,000","<$20,000",
-         "<$20,000","$20,000-$24,999","$25,000-$34,999",
-         "$35,000-$44,999","$45,000-$54,999","$55,000-$64,999",
-         "$65,000-$74,999",">$20,000","<$20,000","$75,000-$99,999",
-         ">$100,000","Refused","Don't know")
-
-set.seed(123)  # Set seed for reproducibility
-merged_info <- mutate(merged_info, Income = sapply(Income, function(x) {
-  if (x %in% code) {
-    i <- which(code == x)
-    if (!is.na(min[i]) && !is.na(max[i])) {
-      return(sample(min[i]:max[i], 1))
-    }
-  }
-  if (x %in% code2){
-    return(NA)
-  }
-}))
-merged_info$Income <- as.numeric(as.character(merged_info$Income))
-```
-
 ## Plot1
 ```{r}
 # Plot1
@@ -123,20 +84,22 @@ ggplot(merged_info, aes(depressScore, CaffConsump)) +
 ```
 ## Plot2
 ```{r}
-update <- merged_info |>
-  na.omit(merged_info$Income)
-ggplot(update, aes(x=Income))+
-  geom_histogram(aes(y=after_stat(density)),binwidth = 3000, fill = "blue", color = "black", alpha = 0.7) +
-  geom_density(lwd=1.25)+
-  labs(title = "Income Distribution", x = "Income", y = "Frequency") +
+ggplot(merged_info, aes(Income)) +
+  geom_histogram(aes(y=after_stat(density)), color = "blue", 
+                 fill = "cornflowerblue", alpha = 0.5) +
+  geom_density(lwd=1.25) +
+  labs(title = "I/P Ratio Distribution",
+       x = "Ratio of family income to poverty", y = "Density") +
   theme_minimal()
 ```
 ## Plot3
 ```{r}
-ggplot(merged_info, aes(x=Income, y=depressLevel)) + 
-  geom_density_ridges(scale=0.75)+
-geom_boxplot(width=0.3)+
-  labs(title="Income horizontal boxplots and ridgeline plots vs. Depression Level",x="Income", y = "Depression Level")
+ggplot(merged_info, aes(x=Income, y=depressLevel, fill = depressLevel)) + 
+  geom_density_ridges(scale=0.75) +
+  geom_boxplot(width = 0.3, alpha = 0.7) +
+  theme(legend.position = "none") +
+  labs(title="I/P Ratio horizontal boxplots and ridgeline plots vs. Depression Level",
+       x="I/P Ratio", y = "Depression Level")
 ```
 ## Plot4
 ```{r}
@@ -187,13 +150,14 @@ mosaic(~ConsumpLevel + depressLevel,
 library("ggpubr")
 high <- ggplot(data=merged_info,aes(x = CaffConsump)) +
   geom_histogram() +
-  xlim(0, 500) +
-  ylim(0,400) +
+  xlim(200, 800) +
+  ylim(0,200) +
   ggtitle("Histogram of Caffine Consumption Lower Part") +
   xlab("Caffine Consumption")
 low <- ggplot(data=merged_info,aes(x = CaffConsump)) +
   geom_histogram() +
-  xlim(500, max(merged_info$CaffConsump)) +
+  xlim(800, max(merged_info$CaffConsump)) +
+  ylim(0,20) +
   ggtitle("Histogram of Caffine Consumption Higher Part") +
   xlab("Caffine Consumption")
 ggarrange(high, low, ncol = 1, nrow = 2)

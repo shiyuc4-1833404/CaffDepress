@@ -81,6 +81,6 @@
     "href": "results.html#plot8",
     "title": "3  Results",
     "section": "3.8 Plot8",
-    "text": "3.8 Plot8\n\n\nCode\nlibrary(GGally)\nggparcoord(data = merged_info, columns = c(2,12,15),alphaLines = 0.01) + ggtitle('Nutrients Parallel Coordinates Plot')"
+    "text": "3.8 Plot8\n\n\nCode\nlibrary(GGally)\nggparcoord(data = merged_info, columns = c(2,12,15),alphaLines = 0.01) + ggtitle('Parallel Coordinates Plot')"
   }
 ]
